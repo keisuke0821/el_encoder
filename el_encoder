@@ -4,7 +4,7 @@
 # Modify this later
 # This project is for ZyboZ7-20
 set p_device "xc7z020clg400-1"
-set p_board "digilentinc.com:zybo-z7-20:part0:1.0"
+set p_board "digilentinc.com:zybo-z7-20:part0:1.2"
 
 set sys_zynq 1
 set project_name el_encoder
