@@ -1,0 +1,33 @@
+# Standard Pmod JE
+set_property PACKAGE_PIN V12 [get_ports rot_a]
+set_property PACKAGE_PIN W16 [get_ports rot_b]
+set_property PACKAGE_PIN J15 [get_ports rot_z]
+set_property PACKAGE_PIN V13 [get_ports ex_sync]
+set_property PACKAGE_PIN U17 [get_ports fanout_0]
+set_property PACKAGE_PIN T17 [get_ports fanout_1]
+
+set_property IOSTANDARD LVCMOS33 [get_ports rot_a]
+set_property IOSTANDARD LVCMOS33 [get_ports rot_b]
+set_property IOSTANDARD LVCMOS33 [get_ports rot_z]
+set_property IOSTANDARD LVCMOS33 [get_ports ex_sync]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_0]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_1]
+
+# High-speed port JB
+set_property PACKAGE_PIN V8 [get_ports fanout_jb[0]]
+set_property PACKAGE_PIN W8 [get_ports fanout_jb[1]]
+set_property PACKAGE_PIN U7 [get_ports fanout_jb[2]]
+set_property PACKAGE_PIN V7 [get_ports fanout_jb[3]]
+set_property PACKAGE_PIN Y7 [get_ports fanout_jb[4]]
+set_property PACKAGE_PIN Y6 [get_ports fanout_jb[5]]
+set_property PACKAGE_PIN V6 [get_ports fanout_jb[6]]
+set_property PACKAGE_PIN W6 [get_ports fanout_jb[7]]
+
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[0]]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[1]]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[2]]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[3]]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[4]]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[5]]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[6]]
+set_property IOSTANDARD LVCMOS33 [get_ports fanout_jb[7]]
