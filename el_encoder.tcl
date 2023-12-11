@@ -141,6 +141,7 @@ apply_bd_automation -rule xilinx.com:bd_rule:axi4 \
 Master {/sys_ps7/M_AXI_GP0} Slave {/axi_gb_rotary/s_axi} \
 intc_ip {New AXI Interconnect} master_apm {0}}  \
 [get_bd_intf_pins axi_gb_rotary/s_axi]
+update_ip_catalog
 
 
 # AXI Stream FIFO
