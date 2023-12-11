@@ -17,26 +17,6 @@ set_property board_part $p_board [current_project]
 set_property ip_repo_paths $lib_dirs [current_fileset]
 update_ip_catalog
 
-
-
-
-
-
-# M AXIS
-
-ipx::infer_bus_interface {\
-    m_axis_tdata \
-    m_axis_tlast \
-    m_axis_tvalid \
-    m_axis_tready} \
-xilinx.com:interface:axis_rtl:1.0 [ipx::current_core]
-
-ipx::associate_bus_interfaces \
-    -busif m_axis -clock dev_clk \
-[ipx::current_core]
-
-ipx::save_core [ipx::current_core]
-
 create_bd_design "system"
 
 ############## Zynq
