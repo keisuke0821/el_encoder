@@ -15,7 +15,7 @@ create_project $project_name . -part $p_device -force
 set_property board_part $p_board [current_project]
 
 set_property ip_repo_paths $lib_dirs [current_fileset]
-update_ip_catalog
+## update_ip_catalog
 
 ## set axi_gb_rotary IP
 # script
