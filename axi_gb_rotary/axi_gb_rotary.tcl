@@ -1,15 +1,16 @@
 # script
 set ip_name "axi_gb_rotary"
-create_project $ip_name . -force
+create_project $ip_name . -forceあ
+set script_directory [file dirname [info script]
 
 # file
 set proj_fileset [get_filesets sources_1]
 add_files -norecurse -scan_for_includes -fileset $proj_fileset [list \
-"axi_gb_rotary.v" \
-"axi_gb_rotary_S00_AXI.v" \
-"encoder_read.v" \
-"pos_status.v" \
-"rising_edge_ms.v" \
+"$script_directory/axi_gb_rotary.v" \
+"$script_directory/axi_gb_rotary_S00_AXI.v" \
+"$script_directory/encoder_read.v" \
+"$script_directory/pos_status.v" \
+"$script_directory/rising_edge_ms.v" \
 ]
 set_property "top" "axi_gb_rotary" $proj_fileset
 
