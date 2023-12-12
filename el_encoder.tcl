@@ -103,11 +103,12 @@ generate_target {synthesis implementation} [get_files  $project_system_dir/syste
 make_wrapper -files [get_files $project_system_dir/system.bd] -top
 
 
-import_files -force -norecurse -fileset sources_1 $project_system_dir/hdl/system_wrapper.v
+import_files -force -norecurse -fileset sources_1 $project_system_dir/hdl/system_wrapper.vあ
+set script_directory [file dirname [info script]]
 add_files -norecurse -fileset sources_1 [list \
-    "el_encoder.xdc" \
-    "system_top.v" \
-    "sync_splitter.v"]
+    "$script_directory/el_encoder.xdc" \
+    "$script_directory/system_top.v" \
+    "$script_directory/sync_splitter.v"]
 set_property top system_top [current_fileset]
 
 
