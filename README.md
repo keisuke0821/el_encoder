@@ -1,3 +1,3 @@
-# el_encodr
+# axi_gb_rotary
 
-Elevation encoder
+AXI bus interface for rotary encoder
