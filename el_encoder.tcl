@@ -105,6 +105,7 @@ ipx::associate_bus_interfaces \
 [ipx::current_core]
 
 ipx::save_core [ipx::current_core]
+update_ip_catalog
 
 
 create_bd_design "system"
