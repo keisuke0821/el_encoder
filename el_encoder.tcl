@@ -42,7 +42,7 @@ set_property -dict [list \
 [get_bd_cells sys_ps7]
 
 # Instantiate AXI GB rotary
-create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gb_rotary:1.0  axi_gb_rotary
+create_bd_cell -type ip -vlnv [get_ipdefs -name "*axi_gb_rotary*"] axi_gb_rotary
 
 # Connect AXI GB rotary to CPU
 connect_bd_net [get_bd_pins sys_ps7/FCLK_CLK0] [get_bd_pins axi_gb_rotary/dev_clk]
