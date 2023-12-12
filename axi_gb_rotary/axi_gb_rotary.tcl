@@ -1,6 +1,6 @@
 # script
 set ip_name "axi_gb_rotary"
-create_project $ip_name . -forceあ
+create_project $ip_name . -force
 set script_directory [file dirname [info script]
 
 # file
