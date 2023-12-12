@@ -103,7 +103,7 @@ generate_target {synthesis implementation} [get_files  $project_system_dir/syste
 make_wrapper -files [get_files $project_system_dir/system.bd] -top
 
 
-import_files -force -norecurse -fileset sources_1 $project_system_dir/hdl/system_wrapper.vあ
+import_files -force -norecurse -fileset sources_1 $project_system_dir/hdl/system_wrapper.v
 set script_directory [file dirname [info script]]
 add_files -norecurse -fileset sources_1 [list \
     "$script_directory/el_encoder.xdc" \
