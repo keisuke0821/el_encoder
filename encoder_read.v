@@ -9,7 +9,7 @@ module encoder_read(
     wire [1:0] 	in_num1;
     wire [1:0] 	in_num2;
 
-    assign in_num1[1:0] = {in_reg1[1], (in_reg1[1]^in_reg1[0])};
+    assign in_num1[1:0] = {in_reg1[1], (in_reg1[1]^in_reg1[0])};  //^はexorの演算子
     assign in_num2[1:0] = {in_reg2[1], (in_reg2[1]^in_reg2[0])};
 
     always @(posedge clk) begin

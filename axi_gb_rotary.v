@@ -1,28 +1,28 @@
 `timescale 1 ns / 1 ps
 
-module axi_gb_rotary #( 
+module axi_gb_rotary #(
     parameter ID = 0 )(
         // Rotary encoder interfaces
-        input wire              rot_a,
-        input wire              rot_b,
-        input wire              rot_z,
+        input wire              rot_a,  //A相のinput
+        input wire              rot_b,  //B相のinput
+        input wire              rot_z,  //Z相のinput
 
         // Synchronization
-        input wire              ex_sync,
+        input wire              ex_sync, //同期信号
 
         // 1kSPS streaming AXIS interface
         output wire [31:0]      m_axis_tdata,
         output reg              m_axis_tlast,
         input wire              m_axis_tready,
         output reg              m_axis_tvalid,
-                
+
         input wire              dev_clk, // Should be 50 MHz
         output wire             interrupt,
 
         // Ports of Axi Slave Bus Interface S00_AXI
         input wire              s_axi_aclk,
         input wire              s_axi_aresetn,
-        
+
         input wire [3 : 0]      s_axi_awaddr,
         input wire [2 : 0]      s_axi_awprot,
         input wire              s_axi_awvalid,
@@ -139,7 +139,7 @@ module axi_gb_rotary #(
                 else
                     step <= step;
             end
-            2'b01: begin 
+            2'b01: begin
                 step <= 2'b10;
                 m_axis_tvalid <= 1'b1;
                 m_axis_tlast <= 1'b1;
