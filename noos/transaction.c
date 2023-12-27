@@ -2,10 +2,10 @@
 #include <string.h>
 #include "sleep.h"
 
-#include "lwip/err.h"
+#include "lwip/err.h" //lwIPスタックに固有のヘッダー
 #include "lwip/tcp.h"
 
-#include "xil_printf.h"
+#include "xil_printf.h" //Xilinxプラットフォームに固有のヘッダー
 #include "xparameters.h"
 #include "xil_io.h"
 #include "xllfifo.h"
@@ -40,7 +40,7 @@ static int test_counter = 0;
 // Synchronization packet handler
 void push_intr_data(u32 coarse, u32 fine){
     int tmp_count = intr_count;
-    intr_count++;	
+    intr_count++;
     intr_buf[tmp_count].header = 0x1207;
     intr_buf[tmp_count].stamp = coarse;
     intr_buf[tmp_count].data = fine;
@@ -51,6 +51,7 @@ err_t tcp_prt(struct tcp_pcb *pcb, const char* prt_char){
     return tcp_write(pcb, prt_char, strlen(prt_char), 1);
 }
 
+// transfer_dataでFIFOからのデータを読み取り、処理してTCP経由で送信
 err_t transfer_data() {
     u32 read_length;
     int i;
@@ -68,7 +69,7 @@ err_t transfer_data() {
         return ERR_CONN;
     }
 
-    // Sleep 
+    // Sleep
     usleep(SLEEP_TIME_US);
 
     while(1){ // Wait until at least one successful receive has completed
@@ -122,6 +123,7 @@ err_t transfer_data() {
     return ERR_OK;
 }
 
+// recv_callbackでTCPクライアントからデータが受信されたときに呼び出される関数
 err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
                                struct pbuf *p, err_t err)
 {
@@ -189,9 +191,9 @@ static void tcp_rot_err(void *arg, err_t err)
     xil_printf("TCP connection aborted\n\r");
 }
 
-
+// accept_callbackで新しいTCP接続が受け入れられたときに呼び出されるコールバック関数
 err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
-{	
+{
     static int connection = 1;
     u32 ret_val;
 
@@ -199,12 +201,12 @@ err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
     tcp_recv(newpcb, recv_callback);
     c_pcb = newpcb;
     tcp_err(c_pcb, tcp_rot_err);
-    
+
     //err = tcp_prt(newpcb, "Hello, world!\r\n");
     connection++;
     /* just use an integer number indicating the connection id as the
        callback argument */
-    
+
     //tcp_arg(newpcb, (void*)(UINTPTR)connection);
 
     /* increment for subsequent accepted connections */
