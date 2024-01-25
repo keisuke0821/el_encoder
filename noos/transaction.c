@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#include "sleep.h"
-
+#include <unistd.h>
 #include "lwip/err.h" //lwIPスタックに固有のヘッダー
 #include "lwip/tcp.h"
-
-#include "xil_printf.h" //Xilinxプラットフォームに固有のヘッダー
-#include "xparameters.h"
-#include "xil_io.h"
-#include "xllfifo.h"
-#include "xstatus.h"
+#include "common/xil_printf.h" //Xilinxプラットフォームに固有のヘッダー
+#include "common/xparameters.h"
+#include "common/xil_io.h"
+#include "common/xllfifo.h"
+#include "common/xstatus.h"
 
 
 #define DATA_LENGTH 2048
@@ -72,6 +70,7 @@ err_t transfer_data() {
     // Sleep
     usleep(SLEEP_TIME_US);
 
+    //XPAR_AXI_FIFO_0_BASEADDRRを使用して、FIFOからデータを読み取る
     while(1){ // Wait until at least one successful receive has completed
         ret_val = Xil_In32(XPAR_AXI_FIFO_0_BASEADDR + 0x00); // Interrupt Status Register
         if(ret_val & (1<<26)){ // Interrupt pending
@@ -89,14 +88,14 @@ err_t transfer_data() {
         if( ret_val != 8 ){ // Each AXIS packet has 32 bit (timestamp) + 32 bit (data) = 64 bit = 8 bytes length
             break;
         }
-
+    //読み取ったデータをdata配列に格納している
         data[i].stamp = Xil_In32(XPAR_AXI_FIFO_0_BASEADDR + 0x20);
         data[i].data = Xil_In32(XPAR_AXI_FIFO_0_BASEADDR + 0x20);
         data[i].header = 0x1207;
         data[i].footer = 0xDA7A;
     }
-
-    tcp_write(c_pcb, data, read_length*sizeof(*data), 1);
+    //ここでデータをSDカードに蓄える
+    tcp_write(c_pcb, data, read_length*sizeof(*data), 1); //read_lengthは受信したデータの長さ
 
     test_counter++;
 
@@ -108,7 +107,7 @@ err_t transfer_data() {
         sync.footer = 0x570C;
         sync.stamp = Xil_In32(XPAR_AXI_GB_ROTARY_BASEADDR + 8);
         sync.data = Xil_In32(XPAR_AXI_GB_ROTARY_BASEADDR + 12);
-        tcp_write(c_pcb, &sync, sizeof(sync), 1);
+        tcp_write(c_pcb, &sync, sizeof(sync), 1); //tcp_write関数を使用して、クライアントにデータを送信
     }
 
     // uart
